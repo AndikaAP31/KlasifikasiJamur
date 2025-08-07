@@ -48,19 +48,19 @@ def extract_glcm(img):
     
     return features
 
-def extract_color_stats(img):
-    # Convert to HSV for better color representation
-    img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+# def extract_color_stats(img):
+#     # Convert to HSV for better color representation
+#     img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     
-    # Extract value channel (brightness)
-    v_channel = img_hsv[:,:,2]
+#     # Extract value channel (brightness)
+#     v_channel = img_hsv[:,:,2]
     
-    # Calculate statistics
-    mean = np.mean(v_channel)
-    variance = np.var(v_channel)
-    median = np.median(v_channel)
+#     # Calculate statistics
+#     mean = np.mean(v_channel)
+#     variance = np.var(v_channel)
+#     median = np.median(v_channel)
     
-    return np.array([mean, variance, median])
+#     return np.array([mean, variance, median])
 
 def extract_features(img):
     # Resize image to standard size
@@ -70,9 +70,9 @@ def extract_features(img):
     hist_features = extract_histogram(img_resized)
     hog_features, _ = extract_hog(img_resized)
     glcm_features = extract_glcm(img_resized)
-    color_stats = extract_color_stats(img_resized)
+    # color_stats = extract_color_stats(img_resized)
     
     # Combine features
-    combined_features = np.hstack([hist_features, hog_features, glcm_features, color_stats])
+    combined_features = np.hstack([hist_features, hog_features, glcm_features])
     
     return combined_features 
